@@ -39,11 +39,26 @@ const App = () => {
     )
   }
 
+  const Announcement = () => {
+    if (userAccount) {
+      return false
+    }
+
+    return (
+      <Grid container justify="center" align="center">
+        <Typography variant="body2" color="primary">
+          🧙‍♂️ Rplanet Staker coming on 3th May 🚀
+        </Typography>
+      </Grid>
+    )
+  }
+
   return (
     <MainLayout>
+      <Announcement />
       <Grid
         container
-        style={{ minHeight: "60vh", paddingBottom: "246px" }}
+        style={{ minHeight: "75vh", paddingBottom: "246px" }}
         direction="column"
         justify="center"
         align="center"

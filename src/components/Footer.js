@@ -1,5 +1,11 @@
 import React from "react"
-import { Grid, Container, makeStyles } from "@material-ui/core"
+import {
+  Grid,
+  Container,
+  makeStyles,
+  Typography,
+  Hidden,
+} from "@material-ui/core"
 import { Logo } from "src/components/Logo"
 import { FaDiscord, FaTwitter, FaGithub } from "react-icons/fa"
 
@@ -8,9 +14,9 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     bottom: "0%",
     background: "#18153d",
-    height: "200px",
     width: "100vw",
     paddingTop: "36px",
+    paddingBottom: "36px",
   },
   icon: {
     color: "#fff",
@@ -20,6 +26,14 @@ const useStyles = makeStyles(theme => ({
       color: theme.palette.secondary.main,
     },
   },
+  mail: {
+    color: "#fff",
+    marginTop: "12px",
+    "&:hover": {
+      color: theme.palette.secondary.main,
+    },
+  },
+  link: { textDecoration: "none" },
 }))
 
 export const Footer = () => {
@@ -34,6 +48,16 @@ export const Footer = () => {
             <Grid container justify="flex-end">
               <Grid item>
                 <Logo simple />
+                <Grid item>
+                  <a
+                    className={classes.link}
+                    href="mailto:contact@waxemist.com"
+                  >
+                    <Typography variant="h6" className={classes.mail}>
+                      contact@waxemist.com
+                    </Typography>
+                  </a>
+                </Grid>
               </Grid>
             </Grid>
             <Grid item>
