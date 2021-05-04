@@ -55,7 +55,6 @@ const App = () => {
 
   return (
     <MainLayout>
-      <Announcement />
       <Grid
         container
         style={{ minHeight: "75vh", paddingBottom: "246px" }}
