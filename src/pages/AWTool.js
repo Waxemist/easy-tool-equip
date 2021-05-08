@@ -46,9 +46,14 @@ const App = () => {
 
     return (
       <Grid container justify="center" align="center">
-        <Typography variant="body2" color="primary">
-          🧙‍♂️ Rplanet Staker coming on 3th May 🚀
-        </Typography>
+        <a
+          style={{ textDecoration: "none", marginBottom: "36px" }}
+          href="https://forms.gle/FDhahCqBDRT9Tokr9"
+        >
+          <Typography variant="body2" color="primary" gutterBottom>
+            🗳️ Announcement: Click here for Poll #1
+          </Typography>
+        </a>
       </Grid>
     )
   }
@@ -57,11 +62,12 @@ const App = () => {
     <MainLayout>
       <Grid
         container
-        style={{ minHeight: "75vh", paddingBottom: "246px" }}
+        style={{ minHeight: "90vh", paddingBottom: "246px" }}
         direction="column"
         justify="center"
         align="center"
       >
+        <Announcement />
         <Grid container justify="center">
           <Typography variant="h2" style={{ color: "#fff" }} gutterBottom>
             Easy AW Tool Equip
