@@ -6,10 +6,12 @@ import { wax, getAssets } from "src/utils/wax"
 import { UserHeader } from "src/components/UserHeader"
 import { MainLayout } from "src/layout"
 import { AssetActionList } from "src/components/AssetActionList"
+import AnnouncementModal from "src/components/AnnouncementModal"
 
 const App = () => {
   const [userAccount, setUserAccount] = React.useState()
   const [userAssets, setUserAssets] = React.useState([])
+  const [modal, setModal] = React.useState()
 
   const handleLogin = async () => {
     const acc = await wax.login()
@@ -39,6 +41,14 @@ const App = () => {
     )
   }
 
+  const handleModalOpen = () => {
+    setModal(true)
+  }
+
+  const handleModalClose = () => {
+    setModal(false)
+  }
+
   const Announcement = () => {
     if (userAccount) {
       return false
@@ -48,12 +58,13 @@ const App = () => {
       <Grid container justify="center" align="center">
         <a
           style={{ textDecoration: "none", marginBottom: "36px" }}
-          href="https://forms.gle/FDhahCqBDRT9Tokr9"
+          onClick={handleModalOpen}
         >
           <Typography variant="body2" color="primary" gutterBottom>
-            🗳️ Announcement: Click here for Poll #1
+            🗳️ Click here for Poll #1 Results !
           </Typography>
         </a>
+        <AnnouncementModal open={modal} handleClose={handleModalClose} />
       </Grid>
     )
   }
