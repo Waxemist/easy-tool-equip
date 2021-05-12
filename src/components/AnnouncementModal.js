@@ -103,7 +103,7 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
               gutterBottom
             >
               We also recieved support messages, thank very much for them, we
-              also considering everything you guys have to say
+              are considering everything you have to say.
             </Typography>
             <Typography
               className={classes.bodyText}
