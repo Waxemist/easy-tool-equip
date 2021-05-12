@@ -57,7 +57,11 @@ const App = () => {
     return (
       <Grid container justify="center" align="center">
         <a
-          style={{ textDecoration: "none", marginBottom: "36px" }}
+          style={{
+            textDecoration: "none",
+            marginBottom: "36px",
+            cursor: "pointer",
+          }}
           onClick={handleModalOpen}
         >
           <Typography variant="body2" color="primary" gutterBottom>
