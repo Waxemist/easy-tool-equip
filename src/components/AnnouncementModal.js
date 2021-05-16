@@ -35,11 +35,19 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
             Hello everybody,
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            We're happy to announce that Alien World Land Teleport is going to
-            be launched this Wednesday 19th May. To celebrate this amazing
-            moment we're going to giveaway three drills. To participate just
-            check our discord in the #giveaways channel. Winners will be chosen
-            on the launch day!!
+            We're happy to announce that{" "}
+            <Typography
+              style={{ fontWeight: 700 }}
+              variant="body2"
+              component="span"
+              color="secondary"
+            >
+              Alien Worlds Land Setter
+            </Typography>{" "}
+            is going to be launched this Wednesday 19th May. To celebrate this
+            amazing moment we're going to giveaway three drills. To participate
+            just check our discord in the #giveaways channel. Winners will be
+            chosen on the launch day!
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
             <Typography
