@@ -65,7 +65,7 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
               component="span"
               color="secondary"
             >
-              AW Teleport
+              AW Land Teleport
             </Typography>{" "}
             allows you to change the land you're at by ID, also by clicking the
             lands in that you save in the browser. It is already finished, but
