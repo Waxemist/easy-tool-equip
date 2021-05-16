@@ -6,29 +6,38 @@ import { wax, getAssets } from "src/utils/wax"
 import { UserHeader } from "src/components/UserHeader"
 import { MainLayout } from "src/layout"
 import { AssetActionList } from "src/components/AssetActionList"
-import AnnouncementModal from "src/components/AnnouncementModal"
 
 const App = () => {
-  const [userAccount, setUserAccount] = React.useState()
   const [userAssets, setUserAssets] = React.useState([])
-  const [modal, setModal] = React.useState()
 
   const handleLogin = async () => {
-    const acc = await wax.login()
-    const assets = await getAssets(acc, "alien.worlds", "tool.worlds")
-    setUserAssets(assets)
-    setUserAccount(acc)
+    await wax.login()
+    await fetchTools()
+  }
+
+  const fetchTools = async () => {
+    try {
+      const assets = await getAssets(
+        wax.userAccount,
+        "alien.worlds",
+        "tool.worlds"
+      )
+      setUserAssets(assets)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   React.useState(() => {
     if (!wax.userAccount) {
-      setUserAccount()
       setUserAssets([])
+    } else {
+      fetchTools()
     }
   }, [wax.userAccount])
 
   const Login = () => {
-    if (userAccount) {
+    if (wax.userAccount) {
       return false
     }
 
@@ -41,66 +50,46 @@ const App = () => {
     )
   }
 
-  const handleModalOpen = () => {
-    setModal(true)
-  }
-
-  const handleModalClose = () => {
-    setModal(false)
-  }
-
-  const Announcement = () => {
-    if (userAccount) {
-      return false
-    }
-
-    return (
-      <Grid container justify="center" align="center">
-        <a
-          style={{
-            textDecoration: "none",
-            marginBottom: "36px",
-            cursor: "pointer",
-          }}
-          onClick={handleModalOpen}
-        >
-          <Typography variant="body2" color="primary" gutterBottom>
-            🗳️ Click here for Poll #1 Results !
-          </Typography>
-        </a>
-        <AnnouncementModal open={modal} handleClose={handleModalClose} />
-      </Grid>
-    )
-  }
-
   return (
     <MainLayout>
       <Grid
         container
-        style={{ minHeight: "90vh", paddingBottom: "246px" }}
+        style={{
+          minHeight: "90vh",
+          paddingBottom: "246px",
+          paddingTop: "80px",
+        }}
         direction="column"
         justify="center"
         align="center"
       >
-        <Announcement />
         <Grid container justify="center">
           <Typography variant="h2" style={{ color: "#fff" }} gutterBottom>
             Easy AW Tool Equip
           </Typography>
         </Grid>
-        <UserHeader userAccount={userAccount} />
+        <UserHeader userAccount={wax.userAccount} />
         <Login />
-        {userAccount && (
-          <Grid style={{ marginTop: "36px" }} container spacing={4}>
+        {wax.userAccount && (
+          <Grid
+            style={{ marginTop: "24px", paddingBottom: "128px" }}
+            container
+            spacing={4}
+          >
             <Grid container justify="center">
-              <Typography variant="h5" color="secondary" gutterBottom>
-                Choose up to 3 tools{" "}
+              <Typography
+                style={{ marginBottom: "44px" }}
+                variant="h5"
+                color="secondary"
+                gutterBottom
+              >
+                Choose up to 3 tools
               </Typography>
             </Grid>
             <AssetActionList
               fabActionLabel={"Change Tools"}
               mode="setbag"
-              userAccount={userAccount}
+              userAccount={wax.userAccount}
               userAssets={userAssets}
               selectLimit={3}
             />

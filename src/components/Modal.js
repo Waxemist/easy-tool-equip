@@ -16,7 +16,6 @@ export default function AlertDialog({
   selectedIds,
   mode,
 }) {
-  console.log(selectedIds)
   const [loading, setLoading] = React.useState()
   const handleSend = async () => {
     try {
@@ -76,7 +75,7 @@ export default function AlertDialog({
           <DialogContent style={{ paddingTop: "48px" }}>
             {assets.map((value, index) => {
               return (
-                <Grid container justify="center">
+                <Grid key={index} container justify="center">
                   <Grid item md={3}>
                     <img
                       style={{

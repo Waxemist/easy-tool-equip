@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
+export default function AlertDialog({ open, handleClose }) {
   const classes = useStyles()
 
   return (
@@ -27,7 +27,7 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
       <React.Fragment>
         <DialogTitle id="alert-dialog-title">
           <Typography variant="h4" color="primary">
-            {"Poll #1 Results"}
+            {""}
           </Typography>
         </DialogTitle>
         <DialogContent style={{ paddingTop: "24px" }}>
@@ -47,7 +47,7 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
               color="secondary"
             >
               Alien Worlds Land Setter
-            </Typography>{" "}
+            </Typography>
             is going to be the new tool added to Waxemist.
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>

@@ -28,34 +28,42 @@ const useAssetStyles = makeStyles(theme => ({
   },
 }))
 
-export const Asset = ({ value, onClick, isSelected = false }) => {
+export const Asset = ({ value, onClick, isSelected = false, noMint }) => {
   const classes = useAssetStyles()
 
   return (
     <Paper
       onClick={() => {
-        onClick(value, isSelected)
+        onClick && onClick(value, isSelected)
       }}
       className={classes.paper}
       elevation={3}
     >
-      <Grid container justify="flex-end">
-        <Checkbox
-          checked={isSelected}
-          color="secondary"
-          inputProps={{ "aria-label": "secondary checkbox" }}
-        />
+      <Grid container justify="flex-end" style={{ height: "50px" }}>
+        {onClick && (
+          <Checkbox
+            checked={isSelected}
+            color="secondary"
+            inputProps={{ "aria-label": "secondary checkbox" }}
+          />
+        )}
       </Grid>
       <Grid container direction="row" justify="center">
         <img
           className={classes.image}
-          src={`https://ipfs.io/ipfs/${value.data.img}`}
+          src={
+            value
+              ? `https://ipfs.io/ipfs/${value.data.img}`
+              : "https://ipfs.atomichub.io/ipfs/QmaUNXHeeFvMGD4vPCC3vpGTr77tJvBHjh1ndUm4J7o4tP"
+          }
         />
         <Typography variant="h6" gutterBottom>
-          {value.name}
+          {value?.name}
         </Typography>
-        <Grid container justify="center">
-          <Typography variant="caption">#{value.template_mint}</Typography>
+        <Grid container justify="center" style={{ height: "30px" }}>
+          {!noMint && (
+            <Typography variant="caption">#{value?.template_mint}</Typography>
+          )}
         </Grid>
       </Grid>
     </Paper>

@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   text: { marginTop: "12px", color: "#fff", userSelect: "none" },
 }))
 
-export const Logo = ({ simple = false }) => {
+export const Logo = () => {
   const classes = useStyles()
   return (
     <Grid item container style={{ cursor: "pointer" }}>
