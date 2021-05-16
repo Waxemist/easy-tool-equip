@@ -65,7 +65,7 @@ const App = () => {
           onClick={handleModalOpen}
         >
           <Typography variant="body2" color="primary" gutterBottom>
-            🗳️ Click here for Poll #1 Results !
+            📅 Click here Land Setter Launch details !
           </Typography>
         </a>
         <AnnouncementModal open={modal} handleClose={handleModalClose} />

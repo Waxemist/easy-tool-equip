@@ -1,6 +1,6 @@
 {
   "name": "wax-p",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
