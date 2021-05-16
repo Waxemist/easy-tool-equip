@@ -44,6 +44,15 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
             >
               Alien Worlds Land Setter
             </Typography>{" "}
+            aka{" "}
+            <Typography
+              style={{ fontWeight: 700 }}
+              variant="body2"
+              component="span"
+              color="primary"
+            >
+              AW Land Teleport{" "}
+            </Typography>
             is going to be launched this Wednesday 19th May. To celebrate this
             amazing moment we're going to giveaway three drills. To participate
             just check our discord in the #giveaways channel. Winners will be
@@ -56,7 +65,7 @@ export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
               component="span"
               color="secondary"
             >
-              Alien Worlds Land Setter
+              AW Teleport
             </Typography>{" "}
             allows you to change the land you're at by ID, also by clicking the
             lands in that you save in the browser. It is already finished, but
