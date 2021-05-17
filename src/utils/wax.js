@@ -7,9 +7,7 @@ const api = new ExplorerApi("https://wax.api.atomicassets.io", "atomicassets", {
   fetch,
 })
 
-const wax = new waxjs.WaxJS("https://wax.greymass.com")
-
-
+const wax = new waxjs.WaxJS("https://wax.greymass.com", null, null, false)
 
 const getAssets = async (owner, collection_name = "alien.worlds", schema) => {
   const assets = await api.getAssets({owner: owner, collection_name: collection_name, schema_name: schema})

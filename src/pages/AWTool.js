@@ -11,7 +11,7 @@ import AnnouncementModal from "src/components/AnnouncementModal"
 const App = () => {
   const [userAccount, setUserAccount] = React.useState()
   const [userAssets, setUserAssets] = React.useState([])
-  const [modal, setModal] = React.useState()
+  const [modal, setModal] = React.useState(false)
 
   const handleLogin = async () => {
     const acc = await wax.login()
@@ -65,7 +65,7 @@ const App = () => {
           onClick={handleModalOpen}
         >
           <Typography variant="body2" color="primary" gutterBottom>
-            📅 Click here for Land Setter Launch details !
+            📅 Click here for Land Setter Launch details!
           </Typography>
         </a>
         <AnnouncementModal open={modal} handleClose={handleModalClose} />
