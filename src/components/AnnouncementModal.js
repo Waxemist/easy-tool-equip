@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function AlertDialog({ open, handleClose, selectedIds, mode }) {
+export default function AlertDialog({ open, handleClose }) {
   const classes = useStyles()
 
   return (

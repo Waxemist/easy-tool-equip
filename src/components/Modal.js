@@ -14,20 +14,27 @@ export default function AlertDialog({
   handleClose,
   assets,
   selectedIds,
+  setSnackbar,
   mode,
 }) {
-  console.log(selectedIds)
   const [loading, setLoading] = React.useState()
   const handleSend = async () => {
     try {
       setLoading(true)
       if (mode === "setbag") {
         const result = await setBag(selectedIds)
+        console.log(result)
         setLoading(false)
         handleClose(false)
+        setSnackbar({
+          open: true,
+          message: "Tools equiped with success!",
+          severity: "success",
+        })
       }
     } catch (err) {
-      console.log(err)
+      setSnackbar({ open: true, message: err.message, severity: "error" })
+      handleClose(false)
     }
   }
 
@@ -52,10 +59,6 @@ export default function AlertDialog({
     )
   }
 
-  const Result = () => {
-    return <Grid container></Grid>
-  }
-
   return (
     <Dialog
       open={open}
@@ -76,7 +79,7 @@ export default function AlertDialog({
           <DialogContent style={{ paddingTop: "48px" }}>
             {assets.map((value, index) => {
               return (
-                <Grid container justify="center">
+                <Grid key={index} container justify="center">
                   <Grid item md={3}>
                     <img
                       style={{
