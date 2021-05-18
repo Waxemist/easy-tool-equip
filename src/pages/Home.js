@@ -56,7 +56,6 @@ const App = () => {
         align="center"
       >
         <Grid container justify="center">
-          <Announcement />
           <Typography variant="h2" style={{ color: "#fff" }} gutterBottom>
             Choose your Tool
           </Typography>

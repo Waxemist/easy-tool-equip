@@ -2,9 +2,17 @@ import React from "react"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogTitle from "@material-ui/core/DialogTitle"
-import { makeStyles, Grid } from "@material-ui/core"
+import { makeStyles, Grid, CircularProgress } from "@material-ui/core"
 import Typography from "@material-ui/core/Typography"
 import { Asset } from "src/components/Asset"
+
+const LoadingModal = () => {
+  return (
+    <Grid container justify="center">
+      <CircularProgress />
+    </Grid>
+  )
+}
 
 const useStyles = makeStyles(theme => ({
   dialogContainer: { paddingTop: "24px", paddingBottom: "48px" },
@@ -13,16 +21,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function AlertDialog({
   open,
-  handleClose,
+  handleCloseLands,
   lands,
   handleSelectLand,
+  loading,
 }) {
   const classes = useStyles()
 
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={handleCloseLands}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
       fullWidth
@@ -34,22 +43,27 @@ export default function AlertDialog({
           </Typography>
         </DialogTitle>
         <DialogContent className={classes.dialogContainer}>
-          <Grid container justify="center">
-            <Grid item xs={10} sm={7}>
-              {lands.map((value, index) => {
-                return (
-                  <Grid container item className={classes.asset}>
-                    <Asset
-                      key={index}
-                      noMint
-                      onClick={() => handleSelectLand(value.asset_id)}
-                      value={value}
-                    />
-                  </Grid>
-                )
-              })}
+          {loading ? (
+            <LoadingModal />
+          ) : (
+            <Grid container justify="center">
+              <Grid item xs={12} sm={7}>
+                {lands.map((value, index) => {
+                  return (
+                    <Grid key={index} container item className={classes.asset}>
+                      <Asset
+                        key={index}
+                        noMint
+                        mode="land"
+                        onClick={() => handleSelectLand(value.asset_id)}
+                        value={value}
+                      />
+                    </Grid>
+                  )
+                })}
+              </Grid>
             </Grid>
-          </Grid>
+          )}
         </DialogContent>
       </React.Fragment>
     </Dialog>

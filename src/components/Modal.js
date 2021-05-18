@@ -14,6 +14,7 @@ export default function AlertDialog({
   handleClose,
   assets,
   selectedIds,
+  setSnackbar,
   mode,
 }) {
   const [loading, setLoading] = React.useState()
@@ -22,11 +23,18 @@ export default function AlertDialog({
       setLoading(true)
       if (mode === "setbag") {
         const result = await setBag(selectedIds)
+        console.log(result)
         setLoading(false)
         handleClose(false)
+        setSnackbar({
+          open: true,
+          message: "Tools equiped with success!",
+          severity: "success",
+        })
       }
     } catch (err) {
-      console.log(err)
+      setSnackbar({ open: true, message: err.message, severity: "error" })
+      handleClose(false)
     }
   }
 
@@ -49,10 +57,6 @@ export default function AlertDialog({
         <Grid item> Check WAX Cloud Wallet</Grid>
       </Grid>
     )
-  }
-
-  const Result = () => {
-    return <Grid container></Grid>
   }
 
   return (

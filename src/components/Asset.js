@@ -28,9 +28,8 @@ const useAssetStyles = makeStyles(theme => ({
   },
 }))
 
-export const Asset = ({ value, onClick, isSelected = false, noMint }) => {
+export const Asset = ({ value, onClick, isSelected = false, noMint, mode }) => {
   const classes = useAssetStyles()
-
   return (
     <Paper
       onClick={() => {
@@ -57,10 +56,28 @@ export const Asset = ({ value, onClick, isSelected = false, noMint }) => {
               : "https://ipfs.atomichub.io/ipfs/QmaUNXHeeFvMGD4vPCC3vpGTr77tJvBHjh1ndUm4J7o4tP"
           }
         />
+        {mode === "land" && value && !onClick && (
+          <Grid container justify="center">
+            <Grid item xs={12}>
+              <Typography variant="caption">
+                Comission: {parseFloat(value?.data?.commission) / 100}%
+              </Typography>
+            </Grid>
+          </Grid>
+        )}
         <Typography variant="h6" gutterBottom>
           {value?.name}
         </Typography>
         <Grid container justify="center" style={{ height: "30px" }}>
+          {mode === "land" && value && (
+            <Grid container justify="center">
+              <Grid item>
+                <Typography variant="caption">
+                  {value?.data?.x}:{value?.data?.y}
+                </Typography>
+              </Grid>
+            </Grid>
+          )}
           {!noMint && (
             <Typography variant="caption">#{value?.template_mint}</Typography>
           )}

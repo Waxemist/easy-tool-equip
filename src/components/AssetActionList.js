@@ -1,9 +1,12 @@
 import React from "react"
 import "src/App.css"
-import { Grid, Snackbar, Fab } from "@material-ui/core"
+import { Grid, Fab } from "@material-ui/core"
 import Alert from "@material-ui/lab/Alert"
 import Modal from "src/components/Modal"
 import { Asset } from "src/components/Asset"
+import Snackbar from "src/components/Snackbar"
+
+const defaultSnackbar = { open: false, message: "", severity: "" }
 
 export const AssetActionList = ({
   userAssets,
@@ -14,19 +17,14 @@ export const AssetActionList = ({
 }) => {
   const [selectedAssets, setSelectedAssets] = React.useState([])
   const [selectedIds, setSelectedIds] = React.useState([])
-  const [alertContent, setAlertContent] = React.useState()
-  const [snackbar, setSnackbar] = React.useState(false)
+  const [snackbar, setSnackbar] = React.useState(defaultSnackbar)
   const [modal, setModal] = React.useState(false)
-
-  const handleCloseSnackbar = () => {
-    setSnackbar(false)
-  }
 
   const handleAssetClick = (asset, isSelected) => {
     if (!isSelected) {
       if (selectedAssets.length >= 3) {
-        setSnackbar(true)
-        setAlertContent({
+        setSnackbar({
+          open: true,
           severity: "warning",
           message: `You can only add up to ${selectLimit} objects`,
         })
@@ -75,14 +73,13 @@ export const AssetActionList = ({
         </Grid>
       ))}
       <Snackbar
-        open={snackbar}
-        autoHideDuration={1500}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert onClose={handleCloseSnackbar} severity={alertContent?.severity}>
-          {alertContent?.message}
-        </Alert>
-      </Snackbar>
+        open={snackbar.open}
+        severity={snackbar.severity}
+        message={snackbar.message}
+        handleClose={() => {
+          setSnackbar(defaultSnackbar)
+        }}
+      />
       {selectedAssets.length > 0 && (
         <Fab
           onClick={openModal}
@@ -96,6 +93,7 @@ export const AssetActionList = ({
       <Modal
         open={modal}
         selectedIds={selectedIds}
+        setSnackbar={setSnackbar}
         mode={mode}
         handleClose={closeModal}
         assets={selectedAssets}

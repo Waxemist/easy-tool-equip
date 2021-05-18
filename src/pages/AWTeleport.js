@@ -6,6 +6,7 @@ import { wax, getAsset, setLand } from "src/utils/wax"
 import { UserHeader } from "src/components/UserHeader"
 import { MainLayout } from "src/layout"
 import { Asset } from "src/components/Asset"
+import Snackbar from "src/components/Snackbar"
 import LandsModal from "src/components/LandsModal"
 
 import { useLandsContext } from "src/context/LandsContext"
@@ -25,13 +26,17 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+const defaultSnackbar = { open: false, message: "", severity: "" }
+
 const App = () => {
   const { lands, saveLands, removeLand } = useLandsContext()
 
   const classes = useStyles()
   const [landId, setLandId] = React.useState("")
   const [searchedLand, setSearchedLand] = React.useState()
-  const [modal, setModal] = React.useState()
+  const [loading, setLoading] = React.useState(false)
+  const [modal, setModal] = React.useState(false)
+  const [snackbar, setSnackbar] = React.useState(defaultSnackbar)
 
   const handleLogin = async () => {
     try {
@@ -42,29 +47,89 @@ const App = () => {
     }
   }
 
-  const handleOpenModal = async () => {
-    setModal(true)
-  }
-
-  const handleCloseModal = async () => {
-    setModal(false)
-  }
-
+  // Search for the land on the atomic assets API
   const handleSearchSubmit = async id => {
-    let asset
-    if (typeof id === "string") {
-      asset = await getAsset(id)
-      console.log(asset)
-      setSearchedLand(asset)
-      return setModal()
-    } else {
-      asset = await getAsset(landId)
-      setSearchedLand(asset)
+    try {
+      let asset
+      // Case for stored lands modal, when handleSearch recieves an asset_id string
+      if (typeof id === "string") {
+        setLoading(true)
+        asset = await getAsset(id)
+        await validateLandObject(asset)
+        setSearchedLand(asset)
+        setLoading(false)
+        return setModal(false)
+      } else {
+        // Else just search the land stored on this component s tate
+
+        asset = await getAsset(landId)
+        await validateLandObject(asset)
+        setSearchedLand(asset)
+      }
+    } catch (err) {
+      if (err.message === "Asset not found") {
+        setSnackbar({
+          open: "true",
+          message: "Asset not found",
+          severity: "error",
+        })
+      }
     }
   }
 
-  const handleSetLand = () => {
-    setLand(landId)
+  const validateLandObject = async asset => {
+    try {
+      if (asset?.schema?.schema_name !== "land.worlds") {
+        setSnackbar({
+          open: true,
+          message: "Given asset id is not a land",
+          severity: "error",
+        })
+        throw false
+      }
+    } catch (err) {
+      throw err
+    }
+  }
+
+  // Wax Cloud call to set the land by ID
+  const handleSetLand = async () => {
+    try {
+      const { transaction_id, processed } = await setLand(landId)
+      if (processed) {
+        setSnackbar({
+          open: true,
+          message: "Land set with success!",
+          severity: "success",
+        })
+      }
+      setSearchedLand()
+    } catch (err) {
+      if (
+        err.message ===
+        "assertion failure with message: ERR::LAND_NOT_CHANGING::Land is not changing"
+      ) {
+        setSnackbar({
+          open: true,
+          message: "ERR::LAND_NOT_CHANGING::Land is not changing",
+          severity: "error",
+        })
+      } else {
+        setSnackbar({
+          open: true,
+          message: err.message,
+          severity: "error",
+        })
+      }
+    }
+  }
+
+  const handleOpenStoredLands = async () => {
+    setModal(true)
+  }
+
+  const handleCloseStoredLands = async () => {
+    setModal(false)
   }
 
   const handleToggleLand = () => {
@@ -76,6 +141,9 @@ const App = () => {
   }
 
   const onChangeLandInput = evt => {
+    if (!evt.target.value.match(/^[0-9]*$/)) {
+      return false
+    }
     setLandId(evt.target.value)
   }
 
@@ -119,7 +187,7 @@ const App = () => {
       >
         <Grid container justify="center">
           <Typography variant="h2" className={classes.title} gutterBottom>
-            AW Teleport
+            AW Land Teleport
           </Typography>
         </Grid>
         <UserHeader userAccount={wax.userAccount} />
@@ -154,7 +222,7 @@ const App = () => {
             </Grid>
             <Grid container justify="center">
               <Grid item xs={10} sm={3}>
-                <Asset noMint value={searchedLand} />
+                <Asset noMint mode="land" value={searchedLand} />
               </Grid>
             </Grid>
             <Grid
@@ -189,7 +257,7 @@ const App = () => {
                 </Button>
               </Grid>
               <Grid item>
-                <Button action={handleOpenModal} color="secondary">
+                <Button action={handleOpenStoredLands} color="secondary">
                   Stored Lands
                 </Button>
               </Grid>
@@ -199,8 +267,18 @@ const App = () => {
         <LandsModal
           open={modal}
           lands={lands}
-          handleClose={handleCloseModal}
+          loading={loading}
+          handleCloseLands={handleCloseStoredLands}
           handleSelectLand={handleSearchSubmit}
+          handleClose
+        />
+        <Snackbar
+          open={snackbar.open}
+          severity={snackbar.severity}
+          message={snackbar.message}
+          handleClose={() => {
+            setSnackbar(defaultSnackbar)
+          }}
         />
       </Grid>
     </MainLayout>
