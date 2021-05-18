@@ -7,17 +7,7 @@ const api = new ExplorerApi("https://wax.api.atomicassets.io", "atomicassets", {
   fetch,
 })
 
-const wax = new waxjs.WaxJS("https://wax.greymass.com")
-
-const getAsset = async (id) => {
-  try {
-    const asset = await api.getAsset(id)
-    return asset
-  }
-  catch(err) {
-    throw err
-  }
-}
+const wax = new waxjs.WaxJS("https://wax.greymass.com", null, null, false)
 
 const getAssets = async (owner, collection_name = "alien.worlds", schema) => {
   const assets = await api.getAssets({owner: owner, collection_name: collection_name, schema_name: schema})
@@ -72,10 +62,21 @@ const setLand = async landId => {
     });
     return result
   } catch(err) {
-    console.log(err)
+    throw err
   }
 
 }
+
+const getAsset = async (id) => {
+  try {
+    const asset = await api.getAsset(id)
+    return asset
+  }
+  catch(err) {
+    throw err
+  }
+}
+
 
 
 export { getAssets, getAsset, wax, setBag, setLand }

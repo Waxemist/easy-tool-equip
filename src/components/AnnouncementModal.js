@@ -27,7 +27,7 @@ export default function AlertDialog({ open, handleClose }) {
       <React.Fragment>
         <DialogTitle id="alert-dialog-title">
           <Typography variant="h4" color="primary">
-            {""}
+            {"Land Setter Launch Details"}
           </Typography>
         </DialogTitle>
         <DialogContent style={{ paddingTop: "24px" }}>
@@ -35,11 +35,7 @@ export default function AlertDialog({ open, handleClose }) {
             Hello everybody,
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            It's been an incredible week for Waxemist, we already reached a 1k
-            daily user base and the poll is a success with 148 votes.
-          </Typography>
-          <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            With 95.9% of the votes, we are happy to announce that{" "}
+            We're happy to announce that{" "}
             <Typography
               style={{ fontWeight: 700 }}
               variant="body2"
@@ -47,16 +43,36 @@ export default function AlertDialog({ open, handleClose }) {
               color="secondary"
             >
               Alien Worlds Land Setter
+            </Typography>{" "}
+            aka{" "}
+            <Typography
+              style={{ fontWeight: 700 }}
+              variant="body2"
+              component="span"
+              color="primary"
+            >
+              AW Land Teleport{" "}
             </Typography>
-            is going to be the new tool added to Waxemist.
+            is going to be launched this Wednesday 19th May. To celebrate this
+            amazing moment we're going to giveaway three drills. To participate
+            just check our discord in the #giveaways channel. Winners will be
+            chosen on the launch day!
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            We also recieved support messages, thanks so much for it. We are
-            considering everything you guys have to say.
+            <Typography
+              style={{ fontWeight: 700 }}
+              variant="body2"
+              component="span"
+              color="secondary"
+            >
+              AW Land Teleport
+            </Typography>{" "}
+            allows you to change the land you're at by ID, also by clicking the
+            lands in that you save in the browser. It is already finished, but
+            we're going to use the next days to keep improving the project in
+            general aspects and also test the new tool alot.
           </Typography>
-          <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            Launch day will be announced this week.
-          </Typography>
+
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
             Regards,
           </Typography>
@@ -69,14 +85,10 @@ export default function AlertDialog({ open, handleClose }) {
             Close
           </Button>
           <Button
-            onClick={() =>
-              window.open(
-                "https://docs.google.com/spreadsheets/d/1BkIbo2i9BlBAXC_X7LVFu9-MI06I_tpqEvT3phPvRUU/edit?usp=sharing"
-              )
-            }
+            onClick={() => window.open("https://discord.gg/UfHCfgnBHt")}
             color="primary"
           >
-            View Results
+            Join Discord
           </Button>
         </DialogActions>
       </React.Fragment>
