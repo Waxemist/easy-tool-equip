@@ -50,7 +50,11 @@ const App = () => {
     <MainLayout>
       <Grid
         container
-        style={{ minHeight: "90vh", paddingBottom: "246px" }}
+        style={{
+          minHeight: "90vh",
+          paddingBottom: "246px",
+          paddingTop: "128px",
+        }}
         direction="column"
         justify="center"
         align="center"
