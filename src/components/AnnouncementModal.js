@@ -29,7 +29,7 @@ export default function AlertDialog({ open, handleClose }) {
       <React.Fragment>
         <DialogTitle id="alert-dialog-title">
           <Typography variant="h4" color="primary">
-            Land Setter Launch Details
+            Cloudflare 1020
           </Typography>
         </DialogTitle>
         <DialogContent style={{ paddingTop: "24px" }}>
@@ -37,43 +37,29 @@ export default function AlertDialog({ open, handleClose }) {
             Hello everybody,
           </Typography>
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
-            We're happy to announce that{" "}
-            <Typography
-              style={{ fontWeight: 700 }}
-              variant="body2"
-              component="span"
-              color="secondary"
-            >
-              Alien Worlds Land Setter
-            </Typography>{" "}
-            aka{" "}
-            <Typography
-              style={{ fontWeight: 700 }}
-              variant="body2"
-              component="span"
-              color="primary"
-            >
-              AW Land Teleport{" "}
-            </Typography>
-            is going to be launched this Wednesday 19th May. To celebrate this
-            amazing moment we're going to giveaway three drills. To participate
-            just check our discord in the #giveaways channel. Winners will be
-            chosen on the launch day!
+            If you are getting the Cloudflare 1020 error you can use our
+            secondary links instead.
           </Typography>
-          <Typography className={classes.bodyText} variant="body2" gutterBottom>
+          <a href="https://waxemist.vercel.app">
             <Typography
               style={{ fontWeight: 700 }}
               variant="body2"
-              component="span"
               color="secondary"
+              gutterBottom
             >
-              AW Land Teleport
+              Link 1
             </Typography>{" "}
-            allows you to change the land you're at by ID, also by clicking the
-            lands in that you save in the browser. It is already finished, but
-            we're going to use the next days to keep improving the project in
-            general aspects and also test the new tool alot.
-          </Typography>
+          </a>
+          <a href="https://waxemist.netlify.app">
+            <Typography
+              style={{ fontWeight: 700 }}
+              variant="body2"
+              color="secondary"
+              gutterBottom
+            >
+              Link 2
+            </Typography>{" "}
+          </a>
 
           <Typography className={classes.bodyText} variant="body2" gutterBottom>
             Regards,
@@ -85,12 +71,6 @@ export default function AlertDialog({ open, handleClose }) {
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Close
-          </Button>
-          <Button
-            onClick={() => window.open("https://discord.gg/UfHCfgnBHt")}
-            color="primary"
-          >
-            Join Discord
           </Button>
         </DialogActions>
       </React.Fragment>

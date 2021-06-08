@@ -37,7 +37,10 @@ const App = () => {
           onClick={handleModalOpen}
         >
           <Typography variant="body2" color="primary" gutterBottom>
-            🗒 Click here for update notes!
+            🚫 Cloudflare 1020?
+          </Typography>
+          <Typography variant="body2" color="primary" gutterBottom>
+            ✅ Click here for our secondary links
           </Typography>
         </a>
         <AnnouncementModal open={modal} handleClose={handleModalClose} />
@@ -58,6 +61,7 @@ const App = () => {
         justify="center"
         align="center"
       >
+        <Announcement />
         <Grid container justify="center">
           <Typography variant="h2" style={{ color: "#fff" }} gutterBottom>
             Choose your Tool
