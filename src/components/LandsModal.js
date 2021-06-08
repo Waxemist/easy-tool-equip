@@ -1,12 +1,16 @@
 import React from "react"
-import Dialog from "@material-ui/core/Dialog"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import { makeStyles, Grid, CircularProgress } from "@material-ui/core"
-import Typography from "@material-ui/core/Typography"
-import { Asset } from "src/components/Asset"
+import {
+  makeStyles,
+  Grid,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@material-ui/core"
+import Asset from "src/components/Asset"
 
-const LoadingModal = () => {
+const Loading = () => {
   return (
     <Grid container justify="center">
       <CircularProgress />
@@ -14,19 +18,43 @@ const LoadingModal = () => {
   )
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   dialogContainer: { paddingTop: "24px", paddingBottom: "48px" },
   asset: { marginBottom: "24px" },
 }))
 
-export default function AlertDialog({
+export const Modal = ({
   open,
   handleCloseLands,
   lands,
   handleSelectLand,
   loading,
-}) {
+}) => {
   const classes = useStyles()
+
+  const Lands = () => {
+    if (loading) return <Loading />
+
+    return (
+      <Grid container justify="center">
+        <Grid item xs={12} sm={7}>
+          {lands.map((value, index) => {
+            return (
+              <Grid key={index} container item className={classes.asset}>
+                <Asset
+                  key={index}
+                  noMint
+                  mode="land"
+                  onClick={() => handleSelectLand(value.asset_id)}
+                  value={value}
+                />
+              </Grid>
+            )
+          })}
+        </Grid>
+      </Grid>
+    )
+  }
 
   return (
     <Dialog
@@ -43,29 +71,11 @@ export default function AlertDialog({
           </Typography>
         </DialogTitle>
         <DialogContent className={classes.dialogContainer}>
-          {loading ? (
-            <LoadingModal />
-          ) : (
-            <Grid container justify="center">
-              <Grid item xs={12} sm={7}>
-                {lands.map((value, index) => {
-                  return (
-                    <Grid key={index} container item className={classes.asset}>
-                      <Asset
-                        key={index}
-                        noMint
-                        mode="land"
-                        onClick={() => handleSelectLand(value.asset_id)}
-                        value={value}
-                      />
-                    </Grid>
-                  )
-                })}
-              </Grid>
-            </Grid>
-          )}
+          <Lands />
         </DialogContent>
       </React.Fragment>
     </Dialog>
   )
 }
+
+export default Modal

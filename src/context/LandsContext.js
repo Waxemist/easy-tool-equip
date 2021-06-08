@@ -21,7 +21,6 @@ export const LandsProvider = ({ children }) => {
   }
 
   const setDefaultLands = () => {
-    // Set lands to void
     localStorage.removeItem("aw-lands")
     setLands(defaultLands)
   }

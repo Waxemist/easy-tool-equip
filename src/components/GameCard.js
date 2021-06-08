@@ -1,10 +1,12 @@
 import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import Card from "@material-ui/core/Card"
-import CardActionArea from "@material-ui/core/CardActionArea"
-import CardMedia from "@material-ui/core/CardMedia"
-import Typography from "@material-ui/core/Typography"
-import Grid from "@material-ui/core/Grid"
+import {
+  makeStyles,
+  Card,
+  CardActionArea,
+  CardMedia,
+  Typography,
+  Grid,
+} from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,11 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-export default function GameCard({ image, label, onClick }) {
+export const GameCard = ({ image, label, onClick }) => {
   const classes = useStyles()
 
-  return (
-    <Grid item xs={12} sm={4}>
+  const Image = () => {
+    return (
       <Card className={classes.root}>
         <CardActionArea onClick={onClick}>
           <CardMedia
@@ -38,9 +40,17 @@ export default function GameCard({ image, label, onClick }) {
           />
         </CardActionArea>
       </Card>
+    )
+  }
+
+  return (
+    <Grid item xs={12} sm={4}>
+      <Image />
       <Typography className={classes.text} color="primary" variant="caption">
         {label}
       </Typography>
     </Grid>
   )
 }
+
+export default GameCard

@@ -1,14 +1,12 @@
 import React from "react"
-import "src/App.css"
 import { Button } from "waxemist-ui"
+import { MainLayout } from "src/layout"
 import { Typography, Grid, TextField, makeStyles } from "@material-ui/core"
 import { wax, getAsset, setLand } from "src/utils/wax"
-import { UserHeader } from "src/components/UserHeader"
-import { MainLayout } from "src/layout"
-import { Asset } from "src/components/Asset"
+import UserHeader from "src/components/UserHeader"
+import Asset from "src/components/Asset"
 import Snackbar from "src/components/Snackbar"
 import LandsModal from "src/components/LandsModal"
-
 import { useLandsContext } from "src/context/LandsContext"
 
 const useStyles = makeStyles(theme => ({
@@ -28,9 +26,8 @@ const useStyles = makeStyles(theme => ({
 
 const defaultSnackbar = { open: false, message: "", severity: "" }
 
-const App = () => {
+const AWTeleport = () => {
   const { lands, saveLands, removeLand } = useLandsContext()
-
   const classes = useStyles()
   const [landId, setLandId] = React.useState("")
   const [searchedLand, setSearchedLand] = React.useState()
@@ -44,6 +41,7 @@ const App = () => {
       setSearchedLand(false)
     } catch (err) {
       console.log(err)
+      throw err
     }
   }
 
@@ -67,19 +65,18 @@ const App = () => {
         setSearchedLand(asset)
       }
     } catch (err) {
-      if (err.message === "Asset not found") {
-        setSnackbar({
-          open: "true",
-          message: "Asset not found",
-          severity: "error",
-        })
-      }
+      setSnackbar({
+        open: true,
+        message: err?.message,
+        severity: "error",
+      })
     }
   }
 
   const validateLandObject = async asset => {
     try {
-      if (asset?.schema?.schema_name !== "land.worlds") {
+      const isLand = asset?.schema?.schema_name === "land.worlds"
+      if (!isLand) {
         setSnackbar({
           open: true,
           message: "Given asset id is not a land",
@@ -285,4 +282,4 @@ const App = () => {
   )
 }
 
-export default App
+export default AWTeleport

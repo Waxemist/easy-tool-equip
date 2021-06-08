@@ -1,9 +1,7 @@
 import React from "react"
-import "src/App.css"
 import { Grid, Fab } from "@material-ui/core"
-import Alert from "@material-ui/lab/Alert"
-import Modal from "src/components/Modal"
-import { Asset } from "src/components/Asset"
+import Modal from "src/components/ToolsModal"
+import Asset from "src/components/Asset"
 import Snackbar from "src/components/Snackbar"
 
 const defaultSnackbar = { open: false, message: "", severity: "" }

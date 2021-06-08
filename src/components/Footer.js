@@ -1,12 +1,6 @@
 import React from "react"
-import {
-  Grid,
-  Container,
-  makeStyles,
-  Typography,
-  Hidden,
-} from "@material-ui/core"
-import { Logo } from "src/components/Logo"
+import { Grid, Container, makeStyles, Typography } from "@material-ui/core"
+import Logo from "src/components/Logo"
 import { FaDiscord, FaTwitter, FaGithub } from "react-icons/fa"
 
 const useStyles = makeStyles(theme => ({

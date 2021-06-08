@@ -1,11 +1,13 @@
 import React from "react"
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogTitle from "@material-ui/core/DialogTitle"
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core"
-import Typography from "@material-ui/core/Typography"
 
 const useStyles = makeStyles(theme => ({
   bodyText: {
@@ -27,7 +29,7 @@ export default function AlertDialog({ open, handleClose }) {
       <React.Fragment>
         <DialogTitle id="alert-dialog-title">
           <Typography variant="h4" color="primary">
-            {"Land Setter Launch Details"}
+            Land Setter Launch Details
           </Typography>
         </DialogTitle>
         <DialogContent style={{ paddingTop: "24px" }}>

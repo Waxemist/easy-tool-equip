@@ -1,5 +1,4 @@
 import React from "react"
-import "src/App.css"
 import { Button } from "waxemist-ui"
 import { Typography, Grid } from "@material-ui/core"
 import { wax, getAssets } from "src/utils/wax"
@@ -7,7 +6,7 @@ import { UserHeader } from "src/components/UserHeader"
 import { MainLayout } from "src/layout"
 import { AssetActionList } from "src/components/AssetActionList"
 
-const App = () => {
+const AWTool = () => {
   const [userAssets, setUserAssets] = React.useState([])
 
   const handleLogin = async () => {
@@ -100,4 +99,4 @@ const App = () => {
   )
 }
 
-export default App
+export default AWTool

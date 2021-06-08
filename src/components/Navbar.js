@@ -1,6 +1,6 @@
 import React from "react"
-import { Logo } from "src/components/Logo"
-import { Typography, Grid, Container } from "@material-ui/core"
+import Logo from "src/components/Logo"
+import { Grid, Container } from "@material-ui/core"
 
 export const Navbar = () => {
   return (

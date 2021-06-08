@@ -1,5 +1,4 @@
 import React from "react"
-
 import {
   Typography,
   Grid,
@@ -86,3 +85,5 @@ export const Asset = ({ value, onClick, isSelected = false, noMint, mode }) => {
     </Paper>
   )
 }
+
+export default Asset

@@ -1,9 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import "src/App.css"
 import React from "react"
 import Home from "./pages/Home"
 import Teleport from "./pages/AWTeleport"
 import Tool from "./pages/AWTool"
 import { LandsProvider } from "src/context/LandsContext"
+
 function App() {
   return (
     <LandsProvider>

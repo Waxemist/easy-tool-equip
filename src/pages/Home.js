@@ -1,13 +1,12 @@
 import React from "react"
-import "src/App.css"
-import { Typography, Grid } from "@material-ui/core"
-import { UserHeader } from "src/components/UserHeader"
+import { useHistory } from "react-router-dom"
 import { MainLayout } from "src/layout"
+import { Typography, Grid } from "@material-ui/core"
+import UserHeader from "src/components/UserHeader"
 import AnnouncementModal from "src/components/AnnouncementModal"
 import GameCard from "src/components/GameCard"
 import image1 from "src/assets/Tool4.png"
 import image2 from "src/assets/Tool3.png"
-import { useHistory } from "react-router-dom"
 
 const App = () => {
   const history = useHistory()

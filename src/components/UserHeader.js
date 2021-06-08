@@ -14,3 +14,5 @@ export const UserHeader = ({ userAccount }) => {
     </Grid>
   )
 }
+
+export default UserHeader

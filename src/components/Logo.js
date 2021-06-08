@@ -3,6 +3,9 @@ import logo from "src/logo.png"
 import { Typography, Grid, makeStyles } from "@material-ui/core"
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    cursor: "pointer",
+  },
   img: {
     [theme.breakpoints.up("md")]: {
       width: "55px",
@@ -21,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 export const Logo = () => {
   const classes = useStyles()
   return (
-    <Grid item container style={{ cursor: "pointer" }}>
+    <Grid item container className={classes.container}>
       <img className={classes.img} src={logo} />
       <Typography color="primary" variant="h4" className={classes.text}>
         Waxemist
@@ -29,3 +32,5 @@ export const Logo = () => {
     </Grid>
   )
 }
+
+export default Logo
